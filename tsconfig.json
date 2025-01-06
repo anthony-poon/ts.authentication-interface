@@ -3,6 +3,12 @@
     "jsx": "react-jsx",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@root/*": ["*"],
+      "@share/*": ["share/*"],
+      "@view/*": ["view/*"]
+    }
   }
 }

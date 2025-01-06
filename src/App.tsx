@@ -1,5 +1,5 @@
 import React from "react";
-import env from "./env";
+import env from "@share/env";
 
 const App = () => {
     return (

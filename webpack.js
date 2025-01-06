@@ -27,6 +27,11 @@ module.exports = {
   },
   resolve: {
     extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
+    alias: {
+      '@root': path.resolve(__dirname, 'src'),
+      '@share': path.resolve(__dirname, 'src/share'),
+      '@view': path.resolve(__dirname, 'src/view'),
+    }
   },
   output: {
     path: path.resolve(__dirname, './dist'),
