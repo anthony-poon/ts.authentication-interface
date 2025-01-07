@@ -4,9 +4,11 @@ const config: Config = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   "moduleNameMapper": {
-    "^@root/(.*)$": "<rootDir>/src/$1",
-    "^@share/(.*)$": "<rootDir>/share/$1",
-    "^@view/(.*)$": "<rootDir>/view/$1",
+    "^@api/(.*)$": "<rootDir>/src/share/api/$1",
+    "^@env$": "<rootDir>/src/share/env",
+    "^@component/(.*)$": "<rootDir>/src/share/component/$1",
+    "^@hook/(.*)$": "<rootDir>/src/share/hook/$1",
+    "^@store/(.*)$": "<rootDir>/src/share/store/$1",
   },
 };
 

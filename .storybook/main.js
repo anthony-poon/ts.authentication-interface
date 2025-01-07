@@ -19,9 +19,11 @@ const config = {
   webpackFinal: async (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@root': path.resolve(__dirname, "../src"),
-      '@share': path.resolve(__dirname, "../src/share"),
-      '@view': path.resolve(__dirname, "../view"),
+      '@api': path.resolve(__dirname, "../src/share/api"),
+      '@env': path.resolve(__dirname, "../src/share/env"),
+      '@component': path.resolve(__dirname, "../src/share/component"),
+      '@hook': path.resolve(__dirname, "../src/share/hook"),
+      '@store': path.resolve(__dirname, "../src/share/store"),
     };
     return config;
   }

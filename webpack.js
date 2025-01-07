@@ -26,11 +26,13 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['*', '.js', '.jsx', '.ts', '.tsx', '.d.tsx'],
     alias: {
-      '@root': path.resolve(__dirname, 'src'),
-      '@share': path.resolve(__dirname, 'src/share'),
-      '@view': path.resolve(__dirname, 'src/view'),
+      '@api': path.resolve(__dirname, 'src/share/api'),
+      '@env': path.resolve(__dirname, 'src/share/env'),
+      '@component': path.resolve(__dirname, 'src/share/component'),
+      '@hook': path.resolve(__dirname, 'src/share/hook'),
+      '@store': path.resolve(__dirname, 'src/share/store'),
     }
   },
   output: {
