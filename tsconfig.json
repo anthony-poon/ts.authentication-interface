@@ -6,9 +6,11 @@
     "skipLibCheck": true,
     "baseUrl": "./src",
     "paths": {
-      "@root/*": ["*"],
-      "@share/*": ["share/*"],
-      "@view/*": ["view/*"]
+      "@api/*": ["share/api/*"],
+      "@env": ["share/env"],
+      "@component/*": ["share/component/*"],
+      "@hook/*": ["share/hook/*"],
+      "@store/*": ["share/store/*"]
     }
   }
 }

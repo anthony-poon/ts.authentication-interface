@@ -1,4 +1,4 @@
-import App from '@root/App';
+import App from './App';
 
 export default {
   component: App,

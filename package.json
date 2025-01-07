@@ -1,5 +1,5 @@
 {
-  "name": "ts.react-skeleton",
+  "name": "ts.authentication-interface",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -23,6 +23,7 @@
     "@storybook/react-webpack5": "^8.4.7",
     "@storybook/test": "^8.4.7",
     "@types/jest": "^29.5.14",
+    "@types/lodash": "^4.17.14",
     "@types/node": "^22.10.5",
     "@types/react": "^19.0.3",
     "@types/react-dom": "^19.0.2",
@@ -39,9 +40,17 @@
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.3.1",
+    "@reduxjs/toolkit": "^2.5.0",
+    "axios": "^1.7.9",
     "css-loader": "^7.1.2",
+    "lodash": "^4.17.21",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-redux": "^9.2.0",
+    "react-router": "^7.1.1",
     "react-router-dom": "^7.1.1",
     "sass": "^1.83.1",
     "sass-loader": "^16.0.4",
