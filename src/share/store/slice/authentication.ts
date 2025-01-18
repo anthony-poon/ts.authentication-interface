@@ -47,13 +47,13 @@ export const authentication = createSlice({
     addTokenByType: (state, action: PayloadAction<AddTokenPayload>) => {
       state.tokens[action.payload.type] = parseToken(action.payload.tokenValue);
     },
-    login: (state, action: PayloadAction<LoginPayload>) => {
+    setLogin: (state, action: PayloadAction<LoginPayload>) => {
       state.identity = action.payload.identity;
       state.tokens['access'] = parseToken(action.payload.access);
       state.tokens['refresh'] = parseToken(action.payload.refresh);
       state.roles = action.payload.roles;
     },
-    logout: (state) => {
+    setLogout: (state) => {
       state.tokens = {}
     }
   },
@@ -71,10 +71,21 @@ export const selectToken = (tokenType: TokenType) => (state: RootState) => {
   }
   return tokenValue
 }
+
+export const selectAuthentication = (state: RootState) => {
+  const token = state.authentication.tokens['access'];
+  if (!token) {
+    return null;
+  }
+  return {
+    roles: state.authentication.roles,
+    identity: state.authentication.identity,
+  }
+}
 export const selectIsAuthenticated = createSelector(
   [selectToken('access')],
   (tokeValue) => !!tokeValue // true if access token exists, false otherwise
 );
 
-export const { addTokenByType, login, logout } = authentication.actions;
+export const { addTokenByType, setLogin, setLogout } = authentication.actions;
 export default authentication.reducer;

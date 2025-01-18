@@ -24,6 +24,7 @@ const config = {
       '@component': path.resolve(__dirname, "../src/share/component"),
       '@hook': path.resolve(__dirname, "../src/share/hook"),
       '@store': path.resolve(__dirname, "../src/share/store"),
+      '@url': path.resolve(__dirname, "../src/share/url"),
     };
     return config;
   }

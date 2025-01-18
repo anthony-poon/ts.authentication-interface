@@ -10,7 +10,8 @@
       "@env": ["share/env"],
       "@component/*": ["share/component/*"],
       "@hook/*": ["share/hook/*"],
-      "@store/*": ["share/store/*"]
+      "@store/*": ["share/store/*"],
+      "@url": ["share/url"]
     }
   }
 }

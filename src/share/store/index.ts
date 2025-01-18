@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authentication from './slice/authentication';
+import notification from './slice/notification';
 
 const store =  configureStore({
   reducer: {
-    authentication
+    authentication,
+    notification
   },
 });
 export type AppDispatch = typeof store.dispatch;

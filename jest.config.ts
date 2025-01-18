@@ -9,6 +9,7 @@ const config: Config = {
     "^@component/(.*)$": "<rootDir>/src/share/component/$1",
     "^@hook/(.*)$": "<rootDir>/src/share/hook/$1",
     "^@store/(.*)$": "<rootDir>/src/share/store/$1",
+    "^@url$": "<rootDir>/src/share/url",
   },
 };
 
