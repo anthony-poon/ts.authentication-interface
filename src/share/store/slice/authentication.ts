@@ -1,5 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@store/index';
+import { useMemo } from 'react';
 
 const parseToken = (tokenValue: string) => {
   const claim = JSON.parse(atob(tokenValue.split(".")[1]));
@@ -72,20 +73,10 @@ export const selectToken = (tokenType: TokenType) => (state: RootState) => {
   return tokenValue
 }
 
-export const selectAuthentication = (state: RootState) => {
-  const token = state.authentication.tokens['access'];
-  if (!token) {
-    return null;
-  }
-  return {
-    roles: state.authentication.roles,
-    identity: state.authentication.identity,
-  }
-}
 export const selectIsAuthenticated = createSelector(
   [selectToken('access')],
   (tokeValue) => !!tokeValue // true if access token exists, false otherwise
 );
 
 export const { addTokenByType, setLogin, setLogout } = authentication.actions;
-export default authentication.reducer;
+export default authentication;

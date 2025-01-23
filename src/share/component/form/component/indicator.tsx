@@ -15,7 +15,7 @@ export const LoadingIndicator = () => {
         alignItems: "center",
         justifyContent: "center",
       }}>
-      <CircularProgress size={16} color="secondary" />
+      <CircularProgress size={16} color="primary" />
     </span>
   );
 };

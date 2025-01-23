@@ -1,14 +1,13 @@
 import React from "react";
 import { Box } from '@mui/material';
-import AppContainer from '@component/container/AppContainer';
 import FormTextInput from '@component/form/FormTextInput';
 import FormSubmitButton from '@component/form/FormSubmitButton';
 import { makeFormData } from '@hook/use-form-data';
 import FormContainer from '@component/form/FormContainer';
-import { LoginRequest } from '@api/authentication';
 import { SubTitle, Title } from '@component/text';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 import FormPasswordInput from '@component/form/FormPasswordInput';
+import CardLayout from '@component/layout/card/CardLayout';
 
 type LoginAppViewProps = {
   isSubmitting: boolean;
@@ -35,7 +34,7 @@ const UsernameLoginAppView = (props: LoginAppViewProps) => {
   }
 
   return (
-    <AppContainer size={"sm"} isCentered={true}>
+    <CardLayout size={"sm"} isCentered={true}>
       <Box mx={2} my={5}>
         <FormContainer onSubmit={handleSubmit}>
           <Box textAlign={"center"} my={3}>
@@ -53,11 +52,13 @@ const UsernameLoginAppView = (props: LoginAppViewProps) => {
             label={"Username"}
             value={formData.username}
             onChange={makeFormChange("username")}
+            required={true}
           />
           <FormPasswordInput
             label={"Password"}
             value={formData.password}
             onChange={makeFormChange("password")}
+            required={true}
           />
           <FormSubmitButton
             onClick={handleSubmit}
@@ -65,7 +66,7 @@ const UsernameLoginAppView = (props: LoginAppViewProps) => {
           />
         </FormContainer>
       </Box>
-    </AppContainer>
+    </CardLayout>
   )
 }
 

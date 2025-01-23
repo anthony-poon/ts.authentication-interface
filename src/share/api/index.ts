@@ -1,7 +1,9 @@
 import * as Authentication from "./authentication";
+import * as User from '@api/user';
 
 const API = {
-  Authentication
+  Authentication,
+  User
 }
 
 export default API;

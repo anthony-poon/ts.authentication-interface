@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
-import { selectAuthentication } from '@store/slice/authentication';
+import { selectIsAuthenticated } from '@store/slice/authentication';
 import React, { useEffect } from 'react';
 import { Outlet, Route, RouteProps, useLocation, useNavigate } from 'react-router';
 import URLs from '@url';
-import Random from '../utils/random';
+import Random from '../../utils/random';
 import env from '@env';
 
 type PrivateRouteProps = RouteProps & {
@@ -11,11 +11,11 @@ type PrivateRouteProps = RouteProps & {
 }
 
 const useOnMount = () => {
-  const authorization = useSelector(selectAuthentication);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
-    if (authorization) {
+    if (isAuthenticated) {
       return;
     }
     const state = Random.alphanumeric(8);
@@ -23,9 +23,9 @@ const useOnMount = () => {
     const redirect = `${location.pathname}${location.search}${location.hash}`
     const callback = encodeURIComponent(`${env.AUTHENTICATION_CALLBACK_URL}?state=${state}&redirect=${redirect}`);
     navigate(URLs.authorize.login + `?callback=${callback}`);
-  }, [authorization]);
+  }, [isAuthenticated]);
   return {
-    isAuthenticated: !!authorization,
+    isAuthenticated: isAuthenticated,
   }
 }
 

@@ -1,9 +1,9 @@
 import { action } from "@storybook/addon-actions";
-import UsernameLoginAppView from './UsernameLoginAppView';
+import TOTPLoginAppView from './TOTPLoginAppView';
 
 export default {
-  component: UsernameLoginAppView,
-  title: "Application/Authorize/Username Login",
+  component: TOTPLoginAppView,
+  title: "Application/Authorize/TOTP Login",
   layout: "fullscreen",
   args: {
     onSubmit: action('onSubmit'),

@@ -1,17 +1,13 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import _ from 'lodash';
 
-type InitFormData = {
-  [key: string]: any;
-}
-
 // Merge 2 object only if key exist in target
 const merge = (target: any, input: any) => {
   return _.assign(target, _.pick(input, _.keys(target)));
 };
 
-export const makeFormData = (init: InitFormData) => {
-  return (update = {}) => {
+export const makeFormData = <Type extends Record<string, string>>(init: Type) => {
+  return <Type>(update = {}) => {
     const [formData, setFormData] = useState({ ...init });
     const makeFormChange = (name: string) => {
       return (evt: ChangeEvent<HTMLInputElement>) => {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-export const useLoader = () => {
-  const [isLoading, setLoading] = useState(false);
+export const useLoader = (init = false) => {
+  const [isLoading, setLoading] = useState(init);
   useEffect(() => {
     if (isLoading) {
       document.body.style.cursor = "wait";

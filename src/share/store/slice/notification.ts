@@ -74,4 +74,4 @@ const setToast = (payload: unknown) => {
 };
 export { unsetToast, setToast, setToastError };
 
-export default notification.reducer;
+export default notification;

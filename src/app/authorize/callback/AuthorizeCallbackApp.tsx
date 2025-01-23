@@ -9,7 +9,7 @@ import API from '@api/index';
 const useQuery = () => {
   const { search } = useLocation();
   const query = new URLSearchParams(search);
-  const redirect = query.get("redirect") || null;
+  const redirect = query.get("redirect") || "/";
   const state = query.get("state") || null;
   const token = query.get("token") || null;
   return { redirect, state, token };

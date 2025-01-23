@@ -7,6 +7,7 @@ type FormTextInputProps = {
   value?: string;
   onChange?: (value: ChangeEvent<HTMLInputElement>) => void;
   subLabel?: string;
+  required?: boolean;
 }
 
 type VisibilityIconProps = {
@@ -44,6 +45,7 @@ const FormPasswordInput = (props: FormTextInputProps) => {
         onChange={handleChange}
         fullWidth
         helperText={props.subLabel}
+        required={props.required}
         slotProps={{
           input: {
             endAdornment: <VisibilityIcon isHidden={hidden} onToggle={() => setHidden(!hidden)}/>

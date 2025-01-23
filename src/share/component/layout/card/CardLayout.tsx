@@ -1,9 +1,9 @@
 import React from "react";
 import { Box, Container, Paper, useMediaQuery, useTheme } from '@mui/material';
 import { Breakpoint } from '@mui/system/createBreakpoints/createBreakpoints';
-import ContainerWrapper from '@component/container/component/ContainerWrapper';
+import ContainerWrapper from '@component/layout/card/component/ContainerWrapper';
 
-type AppContainerProps = {
+type CardLayoutProps = {
   isCentered?: boolean;
   size?: Breakpoint
 }
@@ -29,7 +29,7 @@ const ResponsivePaper = (props: React.PropsWithChildren<{}>) => {
   )
 }
 
-const AppContainer = (props: React.PropsWithChildren<AppContainerProps>) => {
+const CardLayout = (props: React.PropsWithChildren<CardLayoutProps>) => {
   return (
     <ContainerWrapper size={props.size} variant={props.isCentered ? 'centered' : 'default'} >
       <ResponsivePaper>
@@ -39,4 +39,4 @@ const AppContainer = (props: React.PropsWithChildren<AppContainerProps>) => {
   )
 }
 
-export default AppContainer;
+export default CardLayout;

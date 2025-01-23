@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 
 export default {
   component: FormSubmitButton,
-  title: "Component/Form Submit Button",
+  title: "Component/Form/Submit Button",
   args: {
     onClick: action("onClick"),
   }

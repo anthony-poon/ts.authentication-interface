@@ -7,7 +7,7 @@ const TextProps = {
 
 export const Title = (props: React.PropsWithChildren) => {
   return (
-    <Typography variant="h4">
+    <Typography variant="h5">
       { props.children }
     </Typography>
   )

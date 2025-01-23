@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { Box, CircularProgress } from '@mui/material';
 
-type AuthorizeCallbackAppViewProps = {
+type LogoutAppViewProps = {
   onMount: () => void
 }
 
-const AuthorizeCallbackAppView = ({ onMount }: AuthorizeCallbackAppViewProps) => {
+const LogoutAppView = ({ onMount }: LogoutAppViewProps) => {
   useEffect(() => {
     onMount();
   }, []);
@@ -23,4 +23,4 @@ const AuthorizeCallbackAppView = ({ onMount }: AuthorizeCallbackAppViewProps) =>
   )
 }
 
-export default AuthorizeCallbackAppView;
+export default LogoutAppView;
