@@ -13,7 +13,9 @@ import AuthorizeCallbackApp from './authorize/callback/AuthorizeCallbackApp';
 import PrivateRoute from '@component/route/PrivateRoute';
 import { CssBaseline } from '@mui/material';
 import LogoutApp from './authorize/logout/LogoutApp';
-import SettingApp from './setting/SettingApp';
+import { SettingMenuApp } from './setting/SettingMenuApp';
+import { UpdatePasswordApp } from './setting/UpdatePasswordApp';
+import { UpdateProfileApp } from './setting/UpdateProfileApp';
 
 const ToastNotificationProvider = () => {
   const dispatch = useDispatch();
@@ -45,7 +47,9 @@ const App = () => {
               <Route path={URLs.home} element={<HomeApp />} />
             </Route>
             <Route element={<PrivateRoute/>}>
-              <Route path={URLs.setting} element={<SettingApp />} />
+              <Route path={URLs.setting.menu} element={<SettingMenuApp />} />
+              <Route path={URLs.setting.password} element={<UpdatePasswordApp />} />
+              <Route path={URLs.setting.profile} element={<UpdateProfileApp />} />
             </Route>
           </Routes>
         </BrowserRouter>

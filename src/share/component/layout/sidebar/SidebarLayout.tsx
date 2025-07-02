@@ -9,6 +9,7 @@ const DRAWER_WIDTH = 240;
 type SidebarLayoutProps = {
   title?: string;
   maxWidth?: Breakpoint | false,
+  align?: "left" | "center",
   menus: {
     items: {
       icon?: React.ReactNode,
@@ -23,6 +24,7 @@ const SidebarLayout = (props: React.PropsWithChildren<SidebarLayoutProps>) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const [isMenuOpen, setMenuOpen] = React.useState(false);
+  console.log(props.align);
   return (
     <Box style={{
       minHeight: '100vh',
@@ -41,10 +43,10 @@ const SidebarLayout = (props: React.PropsWithChildren<SidebarLayoutProps>) => {
       />
       <Box style={{
         marginLeft: isMobile ? 0 : DRAWER_WIDTH,
-        paddingTop: theme.spacing(2),
+        paddingTop: theme.spacing(3),
       }}>
         <Container maxWidth={props.maxWidth || false} fixed sx={{
-          marginLeft: 0,
+          marginLeft: props.align === "center" ? undefined : 0,
         }}>
           { props.children }
         </Container>

@@ -96,7 +96,9 @@ const SidebarMenu = (props: SidebarMenuProps) => {
         open={props.isMenuOpen}
         onClose={props.onMenuClose}
       >
-        <Box height={64}/>
+        <Box height={64} mb={2} style={{
+          flexShrink: 0
+        }}/>
         { props.items.map((item, index) => (
           <SidebarMenuGroup
             key={index}

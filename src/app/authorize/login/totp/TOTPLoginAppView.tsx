@@ -44,7 +44,7 @@ const TOTPLoginAppView = (props: LoginAppViewProps) => {
             value={formData.code}
             onChange={makeFormChange("code")}
             length={6}
-            required={true}
+            isRequired={true}
           />
           <FormSubmitButton
             onClick={handleSubmit}

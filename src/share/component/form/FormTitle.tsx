@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 
 const FormTitle = (props: React.PropsWithChildren<{}>) => {
   return (
-    <Box mb={4}>
+    <Box mb={3}>
       <Title>{ props.children }</Title>
     </Box>
   )

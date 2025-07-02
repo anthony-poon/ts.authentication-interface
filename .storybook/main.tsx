@@ -1,7 +1,8 @@
-const path = require('path');
+import { StorybookConfig } from '@storybook/react-webpack5';
 
-/** @type { import('@storybook/react-webpack5').StorybookConfig } */
-const config = {
+import path from 'path';
+
+const config: StorybookConfig = {
   "stories": [
     "../src/**/*.mdx",
     "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
@@ -17,6 +18,9 @@ const config = {
     "options": {}
   },
   webpackFinal: async (config) => {
+    if (!config.resolve) {
+      return config;
+    }
     config.resolve.alias = {
       ...config.resolve.alias,
       '@api': path.resolve(__dirname, "../src/share/api"),

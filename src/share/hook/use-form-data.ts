@@ -1,32 +1,70 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-import _ from 'lodash';
+import { useEffect, useState } from 'react';
 
-// Merge 2 object only if key exist in target
-const merge = (target: any, input: any) => {
-  return _.assign(target, _.pick(input, _.keys(target)));
-};
+type InputEventLike = {
+  target: HTMLInputElement;
+}
 
-export const makeFormData = <Type extends Record<string, string>>(init: Type) => {
-  return <Type>(update = {}) => {
-    const [formData, setFormData] = useState({ ...init });
-    const makeFormChange = (name: string) => {
-      return (evt: ChangeEvent<HTMLInputElement>) => {
-        setFormData((prev) => ({
-          ...prev,
-          [name]: evt.target.value,
-        }))
+export const makeFormData = <T extends Record<string, unknown>>(init: T) => {
+  return (update?: T) => {
+    const [formData, setFormData] = useState<T>(init);
+
+    useEffect(() => {
+      if (!update) {
+        return;
+      }
+      setFormData(update);
+    }, [update]);
+
+    // Note that is a curried function
+    const makeFormChange = <K extends keyof T>(key: K) => (event: InputEventLike | boolean) => {
+      if (!(key in init)) return;
+
+      if (typeof event === "boolean") {
+        setFormData((prev) => ({ ...prev, [key]: event }));
+        return;
+      }
+
+      let newValue: T[K];
+
+      if (event.target.type === "checkbox" || event.target.type === "radio") {
+        newValue = event.target.checked as T[K];
+      } else if (event.target.type === "file") {
+        newValue = event.target.files?.[0] as T[K];
+      } else if (event.target.type === "number" || typeof formData[key] === "number") {
+        if (!/^\d+$/.test(event.target.value)) {
+          return;
+        }
+        const casted = parseInt(event.target.value);
+        newValue = isNaN(casted) ? formData[key] : (casted as T[K]);
+      } else {
+        newValue = event.target.value as T[K];
+      }
+
+      setFormData((prev) => ({ ...prev, [key]: newValue }));
+    };
+
+    const resetFormData = () => {
+      setFormData(init);
+    }
+
+    const setFormValue = <K extends keyof T>(key: K, value: T[K]) => {
+      if (key in init) {
+        setFormData((prev) => ({ ...prev, [key]: value }));
       }
     }
-    update = merge(init, update);
-    useEffect(() => {
-      setFormData((prev) => ({
-        ...prev,
-        ...update,
-      }));
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [...Object.values(update)]);
-    const hasChange = !_.isEqual(update, formData);
-    const resetFormData = () => setFormData({ ...init });
-    return { formData, makeFormChange, setFormData, resetFormData, hasChange };
+
+    // Export a wrapped setFormData so that 1) ensure a new instance of formData is used 2) only update if key exist in init
+    const setFormDataWrapped = (newFormData: T) => {
+      const newObject = {
+        ...formData,
+      }
+      for (const key in newFormData) {
+        if (!(key in init)) continue;
+        newObject[key] = newFormData[key];
+      }
+      setFormData(newObject);
+    }
+
+    return { formData, makeFormChange, resetFormData, setFormValue, setFormData: setFormDataWrapped };
   };
 };

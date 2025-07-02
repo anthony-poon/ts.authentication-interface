@@ -7,7 +7,7 @@ export default {
   title: "Application/Authorize/Callback",
   layout: "fullscreen",
   args: {
-    onMount: action('onMount'),
+    refresh: action('refresh'),
   },
 };
 

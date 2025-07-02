@@ -7,7 +7,12 @@ const URLs = {
     logout: "/authorize/logout",
   },
   home: "/home",
-  setting: "/setting",
+  setting: {
+    menu: "/setting",
+    password: "/setting/password",
+    profile: "/setting/profile",
+    totp: "/setting/totp",
+  }
 }
 
 export default URLs;

@@ -1,25 +1,39 @@
-import React from "react";
+import React, { JSX } from 'react';
 import { Box, Button } from '@mui/material';
 import { LoadingIndicator } from '@component/form/component/indicator';
+import { useForm } from '@component/form/FormContainer';
 
 type FormSubmitButtonProps = {
-  disabled?: boolean;
-  loading?: boolean;
+  isDisabled?: boolean;
+  isLoading?: boolean;
+  fullWidth?: boolean;
   text?: string;
   onClick: () => void;
+  children?: JSX.Element;
 }
+
+const usePropsWithContext = (props: FormSubmitButtonProps) => {
+  const form = useForm();
+  return {
+    isDisabled: props.isDisabled !== undefined ? props.isDisabled : form.isDisabled,
+    isLoading: props.isLoading !== undefined ? props.isLoading : form.isLoading,
+  }
+}
+
 const FormSubmitButton = (props: FormSubmitButtonProps) => {
+  const resolved = usePropsWithContext(props);
   return (
-    <Box mt={4}>
+    <Box mt={2}>
       <Button
-        disabled={props.disabled || props.loading}
+        disabled={resolved.isDisabled || resolved.isLoading}
         variant="contained"
         type={"submit"}
-        fullWidth
+        fullWidth={props.fullWidth ?? true}
         onClick={props.onClick}
+        sx={{textTransform: 'none'}}
       >
-        { props.loading ? <LoadingIndicator/> : null }
-        { props.text || 'Submit' }
+        { resolved.isLoading ? <LoadingIndicator/> : null }
+        { props.text || props.children || 'Submit' }
       </Button>
     </Box>
   )

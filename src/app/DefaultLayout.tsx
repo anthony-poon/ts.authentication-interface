@@ -8,6 +8,7 @@ import { Breakpoint } from '@mui/system/createBreakpoints/createBreakpoints';
 
 type DefaultLayoutProps = {
   maxWidth?: Breakpoint | false
+  align?: "left" | "center"
 }
 
 const DefaultLayout = (props: React.PropsWithChildren<DefaultLayoutProps>) => {
@@ -23,7 +24,7 @@ const DefaultLayout = (props: React.PropsWithChildren<DefaultLayoutProps>) => {
         },{
           text: 'Setting',
           icon: <SettingsIcon/>,
-          onClick: () => navigate(URLs.setting),
+          onClick: () => navigate(URLs.setting.menu),
         },{
           text: 'Logout',
           onClick: () => navigate(URLs.authorize.logout),
@@ -36,6 +37,7 @@ const DefaultLayout = (props: React.PropsWithChildren<DefaultLayoutProps>) => {
     <SidebarLayout
       maxWidth={props.maxWidth || false}
       menus={APP_MENU}
+      align={props.align}
     >
       { props.children }
     </SidebarLayout>
