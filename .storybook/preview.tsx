@@ -6,7 +6,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { action } from '@storybook/addon-actions';
 import { Provider } from 'react-redux';
 
-const mockReducer = combineReducers({});
+const mockReducer = () => ({});
 
 const dispatchLoggerMiddleware = () => (next: any) => (actionArg: any) => {
   action("Redux Dispatch")(JSON.stringify(actionArg));

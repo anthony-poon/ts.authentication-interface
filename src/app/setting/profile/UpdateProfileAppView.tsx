@@ -8,7 +8,7 @@ import FormSubmitButton from '@component/form/FormSubmitButton';
 import { useDispatch } from 'react-redux';
 import { setToast } from '@store/slice/notification';
 import MountLoader from '@component/MountLoader';
-import DefaultLayout from '../DefaultLayout';
+import DefaultLayout from '../../DefaultLayout';
 
 const useFormData = makeFormData({
   displayName: "",

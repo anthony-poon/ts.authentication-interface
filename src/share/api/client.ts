@@ -15,13 +15,13 @@ httpClient.interceptors.request.use(
     if (!request.authentication) {
       return request;
     }
-    const accessToken = store.getState().authentication.tokens['access']?.tokenValue;
-    const refreshToken = store.getState().authentication.tokens['refresh']?.tokenValue;
-    if (accessToken) {
-      request.headers.Authorization = `Bearer ${accessToken}`;
-    } else if (refreshToken) {
+    const access = store.getState().authentication.tokens['access']?.tokenValue;
+    const refresh = store.getState().authentication.tokens['refresh']?.tokenValue;
+    if (access) {
+      request.headers.Authorization = `Bearer ${access}`;
+    } else if (refresh) {
       const newToken = await API.Authentication.refresh({
-        token: refreshToken
+        token: refresh
       });
       store.dispatch(setLogin(newToken));
       request.headers.Authorization = `Bearer ${newToken}`;

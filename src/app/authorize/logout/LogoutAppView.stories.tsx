@@ -5,9 +5,6 @@ export default {
   component: LogoutAppView,
   title: "Application/Authorize/Logout",
   layout: "fullscreen",
-  args: {
-    onMount: action('onMount'),
-  },
 };
 
 export const Default = {};

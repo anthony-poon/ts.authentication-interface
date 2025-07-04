@@ -4,7 +4,7 @@ import FormTextInput from '@component/form/FormTextInput';
 import FormSubmitButton from '@component/form/FormSubmitButton';
 import { makeFormData } from '@hook/use-form-data';
 import FormContainer from '@component/form/FormContainer';
-import { SubTitle, Title } from '@component/text';
+import { Subtitle, Title } from '@component/text';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 import FormPasswordInput from '@component/form/FormPasswordInput';
 import CardLayout from '@component/layout/card/CardLayout';
@@ -79,9 +79,9 @@ const UsernameLoginAppView = (props: LoginAppViewProps) => {
             <Title>
               Login
             </Title>
-            <SubTitle>
+            <Subtitle>
               Need an account? Create an account here
-            </SubTitle>
+            </Subtitle>
           </Box>
           <FormTextInput
             label={"Username"}

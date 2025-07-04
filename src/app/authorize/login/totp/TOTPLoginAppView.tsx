@@ -3,12 +3,11 @@ import { Box } from '@mui/material';
 import { makeFormData } from '@hook/use-form-data';
 import FormContainer from '@component/form/FormContainer';
 import FormNumberInput from '@component/form/FormNumberInput';
-import { SubTitle, Title } from '@component/text';
+import { Subtitle, Title } from '@component/text';
 import FormSubmitButton from '@component/form/FormSubmitButton';
 import CardLayout from '@component/layout/card/CardLayout';
 
 type LoginAppViewProps = {
-  isSubmitting: boolean;
   onSubmit: (request: FormDataType) => Promise<void>;
 }
 
@@ -37,7 +36,7 @@ const TOTPLoginAppView = (props: LoginAppViewProps) => {
             <Title>Two Factor Authentication</Title>
           </Box>
           <Box mb={4}>
-            <SubTitle>Open the authenticator app and that you used to setup the two factor authentication. Type the security code provided by the application.</SubTitle>
+            <Subtitle>Open the authenticator app and that you used to setup the two factor authentication. Type the security code provided by the application.</Subtitle>
           </Box>
           <FormNumberInput
             label={"Code"}

@@ -1,10 +1,17 @@
-import { Title } from '@component/text';
-import { Box } from '@mui/material';
+import React from "react";
+import { Box, Typography } from '@mui/material';
 
-const FormTitle = (props: React.PropsWithChildren<{}>) => {
+type FormTitleProps = React.PropsWithChildren<{
+  subtitle?: string;
+}>
+
+const FormTitle = (props: FormTitleProps) => {
   return (
     <Box mb={3}>
-      <Title>{ props.children }</Title>
+      <Typography variant="h5">{ props.children }</Typography>
+      { props.subtitle && (
+        <Typography variant="subtitle2" color="textSecondary">{ props.subtitle }</Typography>
+      ) }
     </Box>
   )
 }

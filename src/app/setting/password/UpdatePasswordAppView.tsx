@@ -6,7 +6,7 @@ import FormContainer from '@component/form/FormContainer';
 import FormTitle from '@component/form/FormTitle';
 import FormPasswordInput from '@component/form/FormPasswordInput';
 import FormSubmitButton from '@component/form/FormSubmitButton';
-import DefaultLayout from '../DefaultLayout';
+import DefaultLayout from '../../DefaultLayout';
 
 const useFormData = makeFormData({
   oldPassword: "",

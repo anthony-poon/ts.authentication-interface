@@ -13,9 +13,11 @@ import AuthorizeCallbackApp from './authorize/callback/AuthorizeCallbackApp';
 import PrivateRoute from '@component/route/PrivateRoute';
 import { CssBaseline } from '@mui/material';
 import LogoutApp from './authorize/logout/LogoutApp';
-import { SettingMenuApp } from './setting/SettingMenuApp';
-import { UpdatePasswordApp } from './setting/UpdatePasswordApp';
-import { UpdateProfileApp } from './setting/UpdateProfileApp';
+import { SettingMenuApp } from './setting/menu/SettingMenuApp';
+import { UpdatePasswordApp } from './setting/password/UpdatePasswordApp';
+import { UpdateProfileApp } from './setting/profile/UpdateProfileApp';
+import { ListTOTPApp } from './setting/totp/list/ListTOTPApp';
+import { AddTOTPApp } from './setting/totp/add/AddTOTPApp';
 
 const ToastNotificationProvider = () => {
   const dispatch = useDispatch();
@@ -45,11 +47,11 @@ const App = () => {
             <Route path={URLs.authorize.callback} element={<AuthorizeCallbackApp />} />
             <Route element={<PrivateRoute/>}>
               <Route path={URLs.home} element={<HomeApp />} />
-            </Route>
-            <Route element={<PrivateRoute/>}>
               <Route path={URLs.setting.menu} element={<SettingMenuApp />} />
               <Route path={URLs.setting.password} element={<UpdatePasswordApp />} />
               <Route path={URLs.setting.profile} element={<UpdateProfileApp />} />
+              <Route path={URLs.setting.totp.list} element={<ListTOTPApp/>}/>
+              <Route path={URLs.setting.totp.add} element={<AddTOTPApp/>}/>
             </Route>
           </Routes>
         </BrowserRouter>

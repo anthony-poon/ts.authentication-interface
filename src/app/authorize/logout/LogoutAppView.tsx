@@ -1,15 +1,21 @@
 import React, { useEffect } from 'react';
 import { Box, CircularProgress } from '@mui/material';
+import { useNavigate } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { setLogout } from '@store/slice/authentication';
+import URLs from '@url';
 
-type LogoutAppViewProps = {
-  onMount: () => void
+const useOnMount = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setLogout());
+    navigate(URLs.authorize.login);
+  }, []);
 }
 
-const LogoutAppView = ({ onMount }: LogoutAppViewProps) => {
-  useEffect(() => {
-    onMount();
-  }, []);
-
+const LogoutAppView = () => {
+  useOnMount();
   return (
     <Box style={{
       width: '100vw',

@@ -11,7 +11,10 @@ const URLs = {
     menu: "/setting",
     password: "/setting/password",
     profile: "/setting/profile",
-    totp: "/setting/totp",
+    totp: {
+      list: "/setting/totp",
+      add: "/setting/totp/register",
+    }
   }
 }
 

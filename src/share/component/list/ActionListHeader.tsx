@@ -1,10 +1,23 @@
 import React from 'react';
-import { ListSubheader } from '@mui/material';
+import { Box, ListSubheader } from '@mui/material';
 
-export const ActionListHeader = (props: React.PropsWithChildren<{}>) => {
+type ActionListHeaderProps = React.PropsWithChildren<{
+  button?: React.ReactNode;
+}>
+
+export const ActionListHeader = (props: ActionListHeaderProps) => {
   return (
     <ListSubheader>
-      { props.children }
+      <Box display={"flex"}>
+        <Box flexGrow={1}>
+          { props.children }
+        </Box>
+        { props.button && (
+          <Box>
+            { props.button }
+          </Box>
+        ) }
+      </Box>
     </ListSubheader>
   )
 }

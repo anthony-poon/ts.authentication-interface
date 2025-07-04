@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import Loader from '@component/Loader';
 
 type MountLoaderProps = {
@@ -7,20 +7,32 @@ type MountLoaderProps = {
   fullscreen?: boolean;
 };
 
+export type MountLoaderHandle = {
+  reload: () => void;
+};
 
-const MountLoader = (props: MountLoaderProps) => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+const MountLoader = forwardRef<MountLoaderHandle, MountLoaderProps>((props, ref) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  const load = async () => {
+    setIsLoading(true);
+    await props.onMount();
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    (async () => {
-      await props.onMount();
-      setIsLoading(false);
-    })();
+    (async () => await load())();
   }, []);
+
+  useImperativeHandle(ref, () => ({
+    reload: load
+  }));
+
   return (
     <Loader isLoading={isLoading}>
-      { props.children }
+      {props.children}
     </Loader>
-  )
-}
+  );
+});
 
 export default MountLoader;

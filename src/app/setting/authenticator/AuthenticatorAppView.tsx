@@ -1,5 +1,0 @@
-const AuthenticatorAppView = () => {
-  return (
-    <></>
-  )
-}

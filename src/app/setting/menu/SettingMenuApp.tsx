@@ -1,5 +1,5 @@
 import React from "react"
-import DefaultLayout from '../DefaultLayout';
+import DefaultLayout from '../../DefaultLayout';
 import { ActionList } from '@component/list/ActionList';
 import { NavigableAction } from '@component/list/NavigableAction';
 import { ActionListHeader } from '@component/list/ActionListHeader';
@@ -13,13 +13,13 @@ export const SettingMenuApp = () => {
     <DefaultLayout maxWidth={"md"} align={"center"}>
       <ActionList title={"Setting"}>
         <ActionListHeader>General</ActionListHeader>
-        <NavigableAction onClick={() => navigate(URLs.setting.profile)}>
+        <NavigableAction to={URLs.setting.profile}>
           Profile
         </NavigableAction>
-        <NavigableAction onClick={() => navigate(URLs.setting.password)}>
+        <NavigableAction to={URLs.setting.password}>
           Change Password
         </NavigableAction>
-        <NavigableAction onClick={() => navigate(URLs.setting.totp)}>
+        <NavigableAction to={URLs.setting.totp.list}>
           Two Factor Authentication
         </NavigableAction>
       </ActionList>

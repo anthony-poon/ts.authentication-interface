@@ -9,6 +9,7 @@ export type FormTextInputProps = {
   subLabel?: string;
   length?: number;
   isRequired?: boolean;
+  isReadyOnly?: boolean;
   isDisabled?: boolean;
 }
 
@@ -34,6 +35,11 @@ const FormTextInput = (props: FormTextInputProps) => {
         helperText={props.subLabel}
         required={props.isRequired}
         disabled={isDisabled}
+        slotProps={{
+          input: {
+            readOnly: !!props.isReadyOnly,
+          },
+        }}
       />
     </Box>
   );

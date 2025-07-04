@@ -7,14 +7,15 @@ import {
   ListItem, ListItemButton,
   ListItemIcon,
   ListItemText,
-  useMediaQuery,
-  useTheme
+  Link as MUILink
 } from '@mui/material';
+import { Link as RouterLink } from 'react-router';
 
 type SidebarItemProps = {
   icon?: React.ReactNode,
   text: string,
-  onClick: () => void,
+  href?: string,
+  to?: string,
 }
 
 type SidebarItemGroup = {
@@ -40,24 +41,48 @@ type DrawerProps = {
 const SidebarMenuGroup = (props: SidebarItemGroup) => {
   return (
     <List>
-      { props.items.map((item) => (
-        <ListItem key={item.text} disablePadding>
-          <ListItemButton onClick={item.onClick}>
-            <ListItemIcon>
-              {item.icon ? item.icon : null}
-            </ListItemIcon>
+      {props.items.map((item) => {
+        const content = (
+          <>
+            <ListItemIcon>{item.icon || null}</ListItemIcon>
             <ListItemText primary={item.text} />
-          </ListItemButton>
-        </ListItem>
-      )) }
-      { props.isLast ? null : (
+          </>
+        );
+
+        if (item.to) {
+          return (
+            <ListItem key={item.text} disablePadding>
+              <MUILink
+                component={RouterLink}
+                to={item.to}
+                underline="none"
+                color="inherit"
+                sx={{ width: '100%', display: 'flex' }}
+              >
+                <ListItemButton component="span">
+                  {content}
+                </ListItemButton>
+              </MUILink>
+            </ListItem>
+          );
+        }
+
+        return (
+          <ListItem key={item.text} disablePadding component={MUILink} href={item.href || "#"} underline="none" color="inherit">
+            <ListItemButton component="span">
+              {content}
+            </ListItemButton>
+          </ListItem>
+        );
+      })}
+      {!props.isLast && (
         <Box pt={1}>
           <Divider />
         </Box>
-      ) }
+      )}
     </List>
-  )
-}
+  );
+};
 
 const MobileDrawer = (props: React.PropsWithChildren<DrawerProps>) => {
   return (

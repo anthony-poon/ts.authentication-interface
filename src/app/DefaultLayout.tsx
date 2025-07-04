@@ -19,15 +19,15 @@ const DefaultLayout = (props: React.PropsWithChildren<DefaultLayoutProps>) => {
         {
           text: 'Home',
           icon: <HomeIcon />,
-          onClick: () => navigate(URLs.home),
+          to: URLs.home,
 
         },{
           text: 'Setting',
           icon: <SettingsIcon/>,
-          onClick: () => navigate(URLs.setting.menu),
+          to: URLs.setting.menu,
         },{
           text: 'Logout',
-          onClick: () => navigate(URLs.authorize.logout),
+          to: URLs.authorize.logout,
         },
       ]
     }

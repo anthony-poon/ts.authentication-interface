@@ -1,30 +1,36 @@
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React from 'react';
 
-const TextProps = {
+type TextProps = React.PropsWithChildren<{
+  gutter?: boolean
+}>
 
-}
-
-export const Title = (props: React.PropsWithChildren) => {
+export const Title = (props: TextProps) => {
   return (
-    <Typography variant="h5">
-      { props.children }
-    </Typography>
+    <Box mb={props.gutter ? 3 : 0}>
+      <Typography variant="h5">
+        { props.children }
+      </Typography>
+    </Box>
   )
 }
 
-export const Body = (props: React.PropsWithChildren) => {
+export const Body = (props: TextProps) => {
   return (
-    <Typography variant="body2">
-      { props.children }
-    </Typography>
+    <Box mb={props.gutter ? 1 : 0}>
+      <Typography variant="body2">
+        { props.children }
+      </Typography>
+    </Box>
   )
 }
 
-export const SubTitle = (props: React.PropsWithChildren) => {
+export const Subtitle = (props: TextProps) => {
   return (
-    <Typography variant="subtitle2" color="textSecondary">
-      { props.children }
-    </Typography>
+    <Box mb={props.gutter ? 2 : 0}>
+      <Typography variant="subtitle2" color="textSecondary">
+        { props.children }
+      </Typography>
+    </Box>
   )
 }
