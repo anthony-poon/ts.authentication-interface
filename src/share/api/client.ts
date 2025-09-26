@@ -1,6 +1,5 @@
-import axios from 'axios';
+import axios, { CreateAxiosDefaults } from 'axios';
 import env from '@env';
-import { useSelector } from 'react-redux';
 import { setLogin, selectToken } from '@store/slice/authentication';
 import API from '@api/index';
 import store from '@store/index';

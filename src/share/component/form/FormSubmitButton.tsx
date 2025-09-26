@@ -8,7 +8,6 @@ type FormSubmitButtonProps = {
   isLoading?: boolean;
   fullWidth?: boolean;
   text?: string;
-  onClick: () => void;
   children?: JSX.Element;
 }
 
@@ -29,7 +28,6 @@ const FormSubmitButton = (props: FormSubmitButtonProps) => {
         variant="contained"
         type={"submit"}
         fullWidth={props.fullWidth ?? true}
-        onClick={props.onClick}
         sx={{textTransform: 'none'}}
       >
         { resolved.isLoading ? <LoadingIndicator/> : null }

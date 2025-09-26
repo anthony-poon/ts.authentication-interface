@@ -12,7 +12,7 @@ import URLs from '@url';
 
 const UsernameLoginApp = () => {
   return (
-    <UsernameLoginAppView login={API.Authentication.login}/>
+    <UsernameLoginAppView authentication={API.Authentication}/>
   )
 }
 

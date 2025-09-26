@@ -8,7 +8,7 @@ import API from '@api/index';
 
 const AuthorizeCallbackApp = () => {
   return (
-    <AuthorizeCallbackAppView refresh={API.Authentication.refresh}/>
+    <AuthorizeCallbackAppView authentication={API.Authentication}/>
   )
 }
 

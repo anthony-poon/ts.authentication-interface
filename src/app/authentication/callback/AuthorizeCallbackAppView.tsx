@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, CircularProgress } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { setToast, setToastError } from '@store/slice/notification';
 import { setLogin } from '@store/slice/authentication';
-import { RefreshRequest, SuccessLoginResponse } from '@api/authentication';
+import { Authentication } from '@api/authentication';
 
 type AuthorizeCallbackAppViewProps = {
-  refresh: (request: RefreshRequest) => Promise<SuccessLoginResponse>;
+  authentication: typeof Authentication;
 }
 
 const useQuery = () => {
@@ -23,29 +23,31 @@ const useOnMount = (props: AuthorizeCallbackAppViewProps) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { redirect, state, token } = useQuery();
-  const handleMount = async () => {
-    if (!redirect || !state || !token) {
-      dispatch(setToastError("Invalid url"));
-      return;
-    }
-    const localState = window.sessionStorage.getItem("state");
-    if (localState != state) {
-      dispatch(setToastError("Invalid state"));
-    }
-    try {
-      const authentication = await props.refresh({ token });
-      dispatch(setLogin(authentication));
-      navigate(redirect);
-    } catch (e) {
-      console.error(e);
-      dispatch(setToast(e))
-    }
-  }
-  return { handleMount }
+
+  useEffect(() => {
+    (async () => {
+      if (!redirect || !state || !token) {
+        dispatch(setToastError("Invalid url"));
+        return;
+      }
+      const localState = window.sessionStorage.getItem("state");
+      if (localState != state) {
+        dispatch(setToastError("Invalid state"));
+      }
+      try {
+        const authentication = await props.authentication.refresh({ token });
+        dispatch(setLogin(authentication));
+        navigate(redirect);
+      } catch (e) {
+        console.error(e);
+        dispatch(setToast(e))
+      }
+    })()
+  }, []);
 }
 
 const AuthorizeCallbackAppView = (props: AuthorizeCallbackAppViewProps) => {
-  const { handleMount } = useOnMount(props);
+  useOnMount(props);
 
   return (
     <Box style={{

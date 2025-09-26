@@ -15,7 +15,7 @@ type Token = {
   expireAt: number,
 }
 
-type TokenType = 'access' | 'refresh' | 'reauthenticate' | 'two_fa';
+type TokenType = 'access' | 'refresh' | 'two_fa_challenge';
 
 type AuthenticationState = {
   identity: string|null,
@@ -61,7 +61,7 @@ export const authentication = createSlice({
 });
 
 export const selectToken = (tokenType: TokenType) => (state: RootState) => {
-  const token = state.authentication.tokens[tokenType];
+  const token = state.authentication?.tokens[tokenType];
   if (!token) {
     return null;
   }
@@ -77,6 +77,8 @@ export const selectIsAuthenticated = createSelector(
   [selectToken('access')],
   (tokeValue) => !!tokeValue // true if access token exists, false otherwise
 );
+
+export const selectRoles = (state: RootState) => state.authentication.roles;
 
 export const { addTokenByType, setLogin, setLogout } = authentication.actions;
 export default authentication;

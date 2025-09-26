@@ -16,6 +16,7 @@ type SidebarLayoutProps = {
       text: string,
       href?: string,
       to?: string,
+      hidden?: boolean,
     }[],
     name?: string
   }[],

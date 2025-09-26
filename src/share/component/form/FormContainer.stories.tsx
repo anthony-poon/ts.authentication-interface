@@ -51,7 +51,7 @@ const FormTemplate = () => {
         value={formData.password}
         onChange={makeFormChange("password")}
       />
-      <FormSubmitButton onClick={handleSubmit}/>
+      <FormSubmitButton/>
     </>
   )
 }

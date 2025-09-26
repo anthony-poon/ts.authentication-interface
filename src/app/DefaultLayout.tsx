@@ -5,6 +5,8 @@ import HomeIcon from '@mui/icons-material/Home';
 import SettingsIcon from '@mui/icons-material/Settings';
 import React from 'react';
 import { Breakpoint } from '@mui/system/createBreakpoints/createBreakpoints';
+import { useSelector } from 'react-redux';
+import { selectIsAuthenticated, selectRoles } from '@store/slice/authentication';
 
 type DefaultLayoutProps = {
   maxWidth?: Breakpoint | false
@@ -12,7 +14,7 @@ type DefaultLayoutProps = {
 }
 
 const DefaultLayout = (props: React.PropsWithChildren<DefaultLayoutProps>) => {
-  const navigate = useNavigate();
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   const APP_MENU =  [
     {
       items: [
@@ -20,14 +22,15 @@ const DefaultLayout = (props: React.PropsWithChildren<DefaultLayoutProps>) => {
           text: 'Home',
           icon: <HomeIcon />,
           to: URLs.home,
-
         },{
           text: 'Setting',
           icon: <SettingsIcon/>,
           to: URLs.setting.menu,
+          hidden: !isAuthenticated
         },{
           text: 'Logout',
           to: URLs.authorize.logout,
+          hidden: !isAuthenticated
         },
       ]
     }

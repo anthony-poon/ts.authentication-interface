@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { makeFormData } from '@hook/use-form-data';
-import { GetProfileResponse, UpdateProfileRequest } from '@api/user/profile';
+import { Profile, UpdateProfileRequest } from '@api/user/profile';
 import FormContainer from '@component/form/FormContainer';
 import FormTitle from '@component/form/FormTitle';
 import FormTextInput from '@component/form/FormTextInput';
@@ -16,8 +16,7 @@ const useFormData = makeFormData({
 })
 
 type UpdateProfileAppViewProps = {
-  onMount: () => Promise<GetProfileResponse>;
-  onSubmit: (data: UpdateProfileRequest) => Promise<void>;
+  profile: typeof Profile;
 }
 
 const useOnMount = (props: UpdateProfileAppViewProps) => {
@@ -26,13 +25,13 @@ const useOnMount = (props: UpdateProfileAppViewProps) => {
 
   const handleMount = async () => {
     try {
-      const profile = await props.onMount();
+      const profile = await props.profile.getOne();
       setFormData(profile);
     } catch (e) {
       dispatch(setToast(e));
     }
   }
-  const handleSubmit = async () => await props.onSubmit(formData);
+  const handleSubmit = async () => await props.profile.updateOne(formData);
 
   return { formData, handleSubmit, handleMount, makeFormChange };
 }
@@ -55,7 +54,6 @@ export const UpdateProfileAppView = (props: UpdateProfileAppViewProps) => {
             onChange={makeFormChange("email")}
           />
           <FormSubmitButton
-            onClick={handleSubmit}
             fullWidth={false}
             text={"Update profile"}
           />

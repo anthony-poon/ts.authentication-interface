@@ -16,6 +16,7 @@ type SidebarItemProps = {
   text: string,
   href?: string,
   to?: string,
+  hidden?: boolean;
 }
 
 type SidebarItemGroup = {
@@ -39,9 +40,10 @@ type DrawerProps = {
 }
 
 const SidebarMenuGroup = (props: SidebarItemGroup) => {
+  const items = props.items.filter(item => !item.hidden);
   return (
     <List>
-      {props.items.map((item) => {
+      {items.map((item) => {
         const content = (
           <>
             <ListItemIcon>{item.icon || null}</ListItemIcon>

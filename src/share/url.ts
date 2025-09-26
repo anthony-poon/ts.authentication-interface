@@ -5,6 +5,11 @@ const URLs = {
     callback: "/authorize/callback",
     login: "/authorize/login",
     logout: "/authorize/logout",
+    totp: "/authorize/totp",
+  },
+  registration: {
+    index: "/registration",
+    validation: "/registration/validation/:token",
   },
   home: "/home",
   setting: {

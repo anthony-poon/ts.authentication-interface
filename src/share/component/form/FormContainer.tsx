@@ -40,7 +40,6 @@ const useAction = (props: FormContainerProps) => {
 
 const FormContainer = (props: React.PropsWithChildren<FormContainerProps>) => {
   const { isLoading, handleSubmit } = useAction(props);
-  console.log(props.isLoading, isLoading, props.isLoading !== undefined ? props.isLoading : isLoading);
   return (
     <FormContext.Provider value={{
       compact: props.compact ?? true,

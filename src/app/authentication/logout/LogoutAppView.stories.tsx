@@ -3,7 +3,7 @@ import LogoutAppView from './LogoutAppView';
 
 export default {
   component: LogoutAppView,
-  title: "Application/Authorize/Logout",
+  title: "Application/Authentication/Logout",
   layout: "fullscreen",
 };
 

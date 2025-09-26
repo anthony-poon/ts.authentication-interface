@@ -21,13 +21,13 @@ export const notification = createSlice({
   initialState,
   reducers: {
     toast: (state, action: PayloadAction<ToastPayload>) => {
-      console.log(action.payload);
       if (typeof action.payload == "string") {
         state.toast = {
           message: action.payload,
           type: "success",
         };
       } else if (action.payload instanceof Error) {
+        console.error(action.payload);
         state.toast = {
           message: action.payload.message,
           type: "error",

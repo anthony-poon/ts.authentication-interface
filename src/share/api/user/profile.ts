@@ -26,3 +26,9 @@ export const updateOne = async (formData: UpdateProfileRequest) => {
 export const updatePassword = async (formData: UpdatePasswordRequest) => {
   await httpClient.put<void>("/user/profile/password", formData)
 }
+
+export const Profile = {
+  getOne,
+  updateOne,
+  updatePassword,
+}

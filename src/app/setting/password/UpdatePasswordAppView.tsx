@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React from 'react';
 import { makeFormData } from '@hook/use-form-data';
 import { useDispatch } from 'react-redux';
 import { setToastError } from '@store/slice/notification';
@@ -7,6 +7,7 @@ import FormTitle from '@component/form/FormTitle';
 import FormPasswordInput from '@component/form/FormPasswordInput';
 import FormSubmitButton from '@component/form/FormSubmitButton';
 import DefaultLayout from '../../DefaultLayout';
+import { Profile } from '@api/user/profile';
 
 const useFormData = makeFormData({
   oldPassword: "",
@@ -14,13 +15,8 @@ const useFormData = makeFormData({
   repeatPassword: "",
 })
 
-type UpdatePasswordData = {
-  oldPassword: string,
-  newPassword: string;
-}
-
 type UpdatePasswordFormProps = {
-  onSubmit: (data: UpdatePasswordData) => Promise<void>;
+  profile: typeof Profile;
 }
 
 const useAction = (props: UpdatePasswordFormProps) => {
@@ -31,7 +27,7 @@ const useAction = (props: UpdatePasswordFormProps) => {
       dispatch(setToastError("Password doesn't match"));
       return;
     }
-    await props.onSubmit({
+    await props.profile.updatePassword({
       oldPassword: formData.oldPassword,
       newPassword: formData.newPassword,
     })
@@ -62,7 +58,6 @@ export const UpdatePasswordAppView = (props: UpdatePasswordFormProps) => {
           onChange={makeFormChange("repeatPassword")}
         />
         <FormSubmitButton
-          onClick={handleSubmit}
           fullWidth={false}
           text={"Update password"}
         />

@@ -1,5 +1,5 @@
-import * as Authentication from "./authentication";
-import * as User from '@api/user';
+import { Authentication } from '@api/authentication';
+import { User } from '@api/user';
 
 const API = {
   Authentication,

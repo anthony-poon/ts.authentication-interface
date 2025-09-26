@@ -34,7 +34,7 @@ export const RegisterTOTPForm = (props: RegisterTOTPFormProps) => {
         value={formData.deviceName}
         onChange={makeFormChange("deviceName")}
       />
-      <FormSubmitButton onClick={handleRegister}/>
+      <FormSubmitButton/>
     </FormContainer>
   )
 }

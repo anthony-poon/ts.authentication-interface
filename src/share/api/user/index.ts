@@ -1,2 +1,7 @@
-export * as Profile from "./profile";
-export * as TOTP from "./totp";
+import { Profile } from '@api/user/profile';
+import { TOTP } from '@api/user/totp';
+
+export const User = {
+  Profile,
+  TOTP
+}

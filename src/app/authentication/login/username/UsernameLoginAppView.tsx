@@ -8,18 +8,17 @@ import { Subtitle, Title } from '@component/text';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 import FormPasswordInput from '@component/form/FormPasswordInput';
 import CardLayout from '@component/layout/card/CardLayout';
-import { useLocation, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@store/index';
 import { useLoader } from '@hook/use-loader';
-import { LoginRequest, LoginResponse } from '@api/authentication';
-import API from '@api/index';
+import { Authentication } from '@api/authentication';
 import { setToast } from '@store/slice/notification';
-import { setLogin } from '@store/slice/authentication';
+import { addTokenByType, setLogin } from '@store/slice/authentication';
 import URLs from '@url';
 
-type LoginAppViewProps = {
-  login: (request: LoginRequest) => Promise<LoginResponse>;
+type UsernameLoginAppViewProps = {
+  authentication: typeof Authentication;
 }
 
 type FormDataType = {
@@ -32,7 +31,7 @@ const useFormData = makeFormData<FormDataType>({
   password: "",
 })
 
-const useSubmit = (props: LoginAppViewProps, formData: FormDataType) => {
+const useSubmit = (props: UsernameLoginAppViewProps, formData: FormDataType) => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { setLoading } = useLoader();
@@ -43,7 +42,7 @@ const useSubmit = (props: LoginAppViewProps, formData: FormDataType) => {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const authentication = await props.login({
+      const authentication = await props.authentication.login({
         ...formData,
         callback,
       });
@@ -51,6 +50,12 @@ const useSubmit = (props: LoginAppViewProps, formData: FormDataType) => {
         dispatch(setToast("Authentication successful."));
         dispatch(setLogin(authentication));
         navigate(redirect ? redirect : URLs.home);
+      } else if (authentication.type === "REQUIRE_TWO_FA") {
+        dispatch(addTokenByType({
+          type: "two_fa_challenge",
+          tokenValue: authentication.challenge
+        }))
+        navigate(URLs.authorize.totp);
       } else if (authentication.type == 'CALLBACK') {
         window.location.href = authentication.callback;
       }
@@ -64,24 +69,26 @@ const useSubmit = (props: LoginAppViewProps, formData: FormDataType) => {
   return { handleSubmit }
 }
 
-const UsernameLoginAppView = (props: LoginAppViewProps) => {
+const UsernameLoginAppView = (props: UsernameLoginAppViewProps) => {
   const { formData, makeFormChange } = useFormData();
   const { handleSubmit } = useSubmit(props, formData);
 
   return (
     <CardLayout size={"sm"} isCentered={true}>
-      <Box mx={2} my={5}>
+      <Box mx={2}>
         <FormContainer onSubmit={handleSubmit}>
-          <Box textAlign={"center"} my={3}>
+          <Box textAlign={"center"} my={5}>
             <LockPersonIcon style={{ fontSize: 42 }} color={"action"} />
           </Box>
           <Box textAlign={"center"}  mb={4}>
             <Title>
               Login
             </Title>
-            <Subtitle>
-              Need an account? Create an account here
-            </Subtitle>
+            <Box mt={1}>
+              <Subtitle>
+                Need an account? Create an account <Link to={URLs.registration.index}>here</Link>
+              </Subtitle>
+            </Box>
           </Box>
           <FormTextInput
             label={"Username"}
@@ -95,9 +102,7 @@ const UsernameLoginAppView = (props: LoginAppViewProps) => {
             onChange={makeFormChange("password")}
             isRequired={true}
           />
-          <FormSubmitButton
-            onClick={handleSubmit}
-          />
+          <FormSubmitButton/>
         </FormContainer>
       </Box>
     </CardLayout>

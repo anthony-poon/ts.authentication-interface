@@ -5,7 +5,7 @@ import API from '@api/index';
 export const UpdatePasswordApp = () => {
   return (
     <UpdatePasswordAppView
-      onSubmit={API.User.Profile.updatePassword}
+      profile={API.User.Profile}
     />
   )
 }

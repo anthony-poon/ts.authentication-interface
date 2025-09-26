@@ -60,7 +60,7 @@ export const ValidateTOTPForm = (props: ValidateTOTPFormProps) => {
           onChange={makeFormChange("code")}
           length={6}
         />
-        <FormSubmitButton onClick={handleValidate}/>
+        <FormSubmitButton/>
       </Box>
     </FormContainer>
   )
