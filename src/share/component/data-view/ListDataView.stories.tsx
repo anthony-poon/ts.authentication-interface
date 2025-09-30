@@ -20,9 +20,6 @@ export default {
         subtitle: "This is a subtitle 3"
       },
     ],
-  },
-  parameters: {
-    layout: "fullscreen",
   }
 } as Meta<typeof ListDataView>;
 

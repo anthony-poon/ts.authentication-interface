@@ -4,7 +4,7 @@ import React from 'react';
 
 export default {
   component: FormNumberInput,
-  title: "Component/Form/Input/Number",
+  title: "Component/Form/Input",
   args: {
     label: "Enter number",
   },
@@ -20,4 +20,4 @@ export default {
   }
 } as Meta<typeof FormNumberInput>;
 
-export const Default: StoryObj<typeof FormNumberInput> = {}
+export const Number: StoryObj<typeof FormNumberInput> = {}

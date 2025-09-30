@@ -5,7 +5,7 @@ import FormNumberInput from '@component/form/FormNumberInput';
 
 export default {
   component: FormPasswordInput,
-  title: "Component/Form/Input/Password",
+  title: "Component/Form/Input",
   args: {
     label: "Enter Password",
   },
@@ -21,4 +21,4 @@ export default {
   }
 } as Meta<typeof FormPasswordInput>;
 
-export const Default: StoryObj<typeof FormPasswordInput> = {}
+export const Password: StoryObj<typeof FormPasswordInput> = {}

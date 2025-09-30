@@ -12,6 +12,7 @@ export type ToastProps = {
 const Toast = (props: ToastProps) => {
   return (
     <Snackbar
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       autoHideDuration={props.duration || 3000}
       open={props.open}
       onClose={props.onClose}

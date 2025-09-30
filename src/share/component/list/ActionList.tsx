@@ -8,11 +8,13 @@ type ActionListProps = React.PropsWithChildren<{
 export const ActionList = (props: ActionListProps) => {
   return (
     <List>
-      <Box px={2} mb={3}>
-        <Typography variant="h5" component="h1">
-          { props.title }
-        </Typography>
-      </Box>
+      { props.title && (
+        <Box px={2} mb={3}>
+          <Typography variant="h5" component="h1">
+            { props.title }
+          </Typography>
+        </Box>
+      ) }
       { props.children }
     </List>
   )

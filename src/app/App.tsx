@@ -1,5 +1,5 @@
 import React from 'react';
-import DefaultUIProvider from "./DefaultUIProvider";
+import AppUIProvider from "./AppUIProvider";
 import { BrowserRouter, Route, Routes } from 'react-router';
 import IndexApp from './index/IndexApp';
 import UsernameLoginApp from './authentication/login/username/UsernameLoginApp';
@@ -7,7 +7,7 @@ import { Provider, useDispatch, useSelector } from 'react-redux';
 import store, { RootState } from '@store/index';
 import Toast from '@component/Toast';
 import { unsetToast } from '@store/slice/notification';
-import URLs from '@url';
+import { URLs } from '@url';
 import HomeApp from './index/HomeApp';
 import AuthorizeCallbackApp from './authentication/callback/AuthorizeCallbackApp';
 import PrivateRoute from '@component/route/PrivateRoute';
@@ -41,28 +41,28 @@ const App = () => {
   return (
     <Provider store={store}>
       <CssBaseline />
-      <DefaultUIProvider>
+      <AppUIProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<IndexApp />} />
-            <Route path={URLs.authorize.login} element={<UsernameLoginApp />} />
-            <Route path={URLs.authorize.logout} element={<LogoutApp />} />
-            <Route path={URLs.authorize.totp} element={<TOTPLoginApp />} />
-            <Route path={URLs.authorize.callback} element={<AuthorizeCallbackApp />} />
-            <Route path={URLs.registration.index} element={<RegistrationApp />} />
-            <Route path={URLs.registration.validation} element={<ValidationApp />} />
+            <Route path={URLs.authorize_login} element={<UsernameLoginApp />} />
+            <Route path={URLs.authorize_logout} element={<LogoutApp />} />
+            <Route path={URLs.authorize_totp} element={<TOTPLoginApp />} />
+            <Route path={URLs.authorize_callback} element={<AuthorizeCallbackApp />} />
+            <Route path={URLs.registration} element={<RegistrationApp />} />
+            <Route path={URLs.registration_validation} element={<ValidationApp />} />
             <Route element={<PrivateRoute/>}>
               <Route path={URLs.home} element={<HomeApp />} />
-              <Route path={URLs.setting.menu} element={<SettingMenuApp />} />
-              <Route path={URLs.setting.password} element={<UpdatePasswordApp />} />
-              <Route path={URLs.setting.profile} element={<UpdateProfileApp />} />
-              <Route path={URLs.setting.totp.list} element={<ListTOTPApp/>}/>
-              <Route path={URLs.setting.totp.add} element={<AddTOTPApp/>}/>
+              <Route path={URLs.setting} element={<SettingMenuApp />} />
+              <Route path={URLs.setting_password} element={<UpdatePasswordApp />} />
+              <Route path={URLs.setting_profile} element={<UpdateProfileApp />} />
+              <Route path={URLs.setting_totp} element={<ListTOTPApp/>}/>
+              <Route path={URLs.setting_totp_register} element={<AddTOTPApp/>}/>
             </Route>
           </Routes>
         </BrowserRouter>
         <ToastNotificationProvider/>
-      </DefaultUIProvider>
+      </AppUIProvider>
     </Provider>
   );
 }

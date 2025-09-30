@@ -8,7 +8,10 @@ import FormSubmitButton from '@component/form/FormSubmitButton';
 import { useDispatch } from 'react-redux';
 import { setToast } from '@store/slice/notification';
 import MountLoader from '@component/MountLoader';
-import DefaultLayout from '../../DefaultLayout';
+import AppLayout from '../../AppLayout';
+import { DefaultContainer } from '@component/layout/components/container/DefaultContainer';
+import { Breadcrumb } from '@component/url/Breadcrumb';
+import { Box } from '@mui/material';
 
 const useFormData = makeFormData({
   displayName: "",
@@ -39,27 +42,31 @@ const useOnMount = (props: UpdateProfileAppViewProps) => {
 export const UpdateProfileAppView = (props: UpdateProfileAppViewProps) => {
   const { formData, handleSubmit, handleMount, makeFormChange } = useOnMount(props);
   return (
-    <DefaultLayout maxWidth={"sm"}>
-      <MountLoader onMount={handleMount}>
-        <FormContainer onSubmit={handleSubmit}>
-          <FormTitle>Profile</FormTitle>
-          <FormTextInput
-            label="Display Name"
-            value={formData.displayName}
-            onChange={makeFormChange("displayName")}
-          />
-          <FormTextInput
-            label="Email"
-            value={formData.email}
-            onChange={makeFormChange("email")}
-          />
-          <FormSubmitButton
-            fullWidth={false}
-            text={"Update profile"}
-          />
-        </FormContainer>
-      </MountLoader>
-    </DefaultLayout>
+    <AppLayout>
+      <DefaultContainer variant={"md"}>
+        <Breadcrumb />
+        <Box px={2}>
+          <MountLoader onMount={handleMount}>
+            <FormContainer onSubmit={handleSubmit}>
+              <FormTextInput
+                label="Display Name"
+                value={formData.displayName}
+                onChange={makeFormChange("displayName")}
+              />
+              <FormTextInput
+                label="Email"
+                value={formData.email}
+                onChange={makeFormChange("email")}
+              />
+              <FormSubmitButton
+                fullWidth={false}
+                text={"Update profile"}
+              />
+            </FormContainer>
+          </MountLoader>
+        </Box>
+      </DefaultContainer>
+    </AppLayout>
 
   )
 }

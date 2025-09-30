@@ -1,5 +1,4 @@
 import React from 'react';
-import CardLayout from '@component/layout/card/CardLayout';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams, useSearchParams } from 'react-router';
 import { setToast } from '@store/slice/notification';
@@ -7,11 +6,11 @@ import {
   Authentication,
   RegisterAccountRequest
 } from '@api/authentication';
-import { Box } from '@mui/material';
 import { RegistrationForm } from './components/RegistrationForm';
 import { RequireValidationPrompt } from './components/RequireValidationPrompt';
 import { setLogin } from '@store/slice/authentication';
-import URLs from '@url';
+import { URLs } from '@url';
+import { DefaultContainer } from '@component/layout/components/container/DefaultContainer';
 
 enum FormStep {
   REGISTRATION_FORM = 'registration_form',
@@ -36,9 +35,9 @@ const useAction = (props: RegisterAppViewProps) => {
           token: response.refresh
         })
         dispatch(setLogin(authentication));
-        navigate(URLs.authorize.login);
+        navigate(URLs.authorize_login);
       } else if (response.type === "REQUIRE_VALIDATION") {
-        navigate(URLs.registration.index + "?step=" + FormStep.REQUIRE_VALIDATION);
+        navigate(URLs.registration + "?step=" + FormStep.REQUIRE_VALIDATION);
       }
     } catch (e) {
       console.log(e);
@@ -52,7 +51,7 @@ const useAction = (props: RegisterAppViewProps) => {
 export const RegistrationAppView = (props: RegisterAppViewProps) => {
   const { step, handleSubmit } = useAction(props);
   return (
-    <>
+    <DefaultContainer variant={"sm"}>
       { step === FormStep.REGISTRATION_FORM ? (
         <RegistrationForm
           onSubmit={handleSubmit}
@@ -60,6 +59,6 @@ export const RegistrationAppView = (props: RegisterAppViewProps) => {
       ) : step === FormStep.REQUIRE_VALIDATION ? (
         <RequireValidationPrompt/>
       ) : null }
-    </>
+    </DefaultContainer>
   )
 }

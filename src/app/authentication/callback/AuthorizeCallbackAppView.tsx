@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setToast, setToastError } from '@store/slice/notification';
 import { setLogin } from '@store/slice/authentication';
 import { Authentication } from '@api/authentication';
+import { DefaultContainer } from '@component/layout/components/container/DefaultContainer';
 
 type AuthorizeCallbackAppViewProps = {
   authentication: typeof Authentication;
@@ -50,15 +51,11 @@ const AuthorizeCallbackAppView = (props: AuthorizeCallbackAppViewProps) => {
   useOnMount(props);
 
   return (
-    <Box style={{
-      width: '100vw',
-      height: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}>
-      <CircularProgress size={32} color="primary" />
-    </Box>
+    <DefaultContainer variant={"sm"}>
+      <Box textAlign={"center"}>
+        <CircularProgress size={32} color="primary" />
+      </Box>
+    </DefaultContainer>
   )
 }
 

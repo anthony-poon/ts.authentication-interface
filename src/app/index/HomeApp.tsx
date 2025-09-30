@@ -1,10 +1,10 @@
-import DefaultLayout from '../DefaultLayout';
-import { ContentPanel } from '@component/panel/ContentPanel';
+import AppLayout from '../AppLayout';
+import { DefaultContainer } from '@component/layout/components/container/DefaultContainer';
 
 const HomeApp = () => {
   return (
-    <DefaultLayout>
-      <ContentPanel>
+    <AppLayout>
+      <DefaultContainer>
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting
         </p>
@@ -29,8 +29,8 @@ const HomeApp = () => {
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting
         </p>
-      </ContentPanel>
-    </DefaultLayout>
+      </DefaultContainer>
+    </AppLayout>
   )
 }
 

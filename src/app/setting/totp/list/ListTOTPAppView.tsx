@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import DefaultLayout from '../../../DefaultLayout';
+import AppLayout from '../../../AppLayout';
 import { ActionList } from '@component/list/ActionList';
 import { ActionListHeader } from '@component/list/ActionListHeader';
 import { GetTOTPResponse } from '@api/user/totp';
@@ -12,7 +12,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { DateTime } from "luxon";
 import { ActionButton } from '@component/button/ActionButton';
 import { useNavigate } from 'react-router';
-import URLs from '@url';
+import { URLs } from '@url';
+import { DefaultContainer } from '@component/layout/components/container/DefaultContainer';
+import { Breadcrumb } from '@component/url/Breadcrumb';
 
 type ListTOTPAppViewProps = {
   getDevices: () => Promise<GetTOTPResponse[]>;
@@ -58,30 +60,33 @@ export const ListTOTPAppView = (props: ListTOTPAppViewProps) => {
   const { devices, handleMount } = useOnMount(props);
   const { loaderRef, handleDelete } = useAction(props);
   return (
-    <DefaultLayout align={"center"} maxWidth={"md"}>
-      <MountLoader ref={loaderRef} onMount={handleMount}>
-        <ActionList title={"Two Factor Authenticator"}>
-          <ActionListHeader
-            button={(
-              <ActionButton size={"small"} onClick={() => navigate(URLs.setting.totp.add)}>
-                Add Device
-              </ActionButton>
-            )}
-          >
-            Registered Device
-          </ActionListHeader>
-          { devices.map((device) => (
-            <IconClickAction
-              key={device.id}
-              onClick={() => handleDelete(device.id)}
-              icon={<DeleteIcon/>}
-              subtitle={`Created at ${formatDate(device.createdAt)}`}
+    <AppLayout>
+      <DefaultContainer variant={"md"}>
+        <Breadcrumb />
+        <MountLoader ref={loaderRef} onMount={handleMount}>
+          <ActionList>
+            <ActionListHeader
+              button={(
+                <ActionButton size={"small"} onClick={() => navigate(URLs.setting_totp)}>
+                  Add Device
+                </ActionButton>
+              )}
             >
-              { device.deviceName }
-            </IconClickAction>
-          )) }
-        </ActionList>
-      </MountLoader>
-    </DefaultLayout>
+              Registered Device
+            </ActionListHeader>
+            { devices.map((device) => (
+              <IconClickAction
+                key={device.id}
+                onClick={() => handleDelete(device.id)}
+                icon={<DeleteIcon/>}
+                subtitle={`Created at ${formatDate(device.createdAt)}`}
+              >
+                { device.deviceName }
+              </IconClickAction>
+            )) }
+          </ActionList>
+        </MountLoader>
+      </DefaultContainer>
+    </AppLayout>
   )
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Button, Typography } from '@mui/material';
 import { Subtitle } from '@component/text';
 import { useNavigate } from 'react-router';
-import URLs from '@url';
+import { URLs } from '@url';
 import FormTitle from '@component/form/FormTitle';
 import { BlockButton } from '@component/button/BlockButton';
 
@@ -32,7 +32,7 @@ export const DisplayRecoveriesView = (props: DisplayRecoveriesViewProps) => {
           </div>
         ))}
       </Box>
-      <BlockButton onClick={() => navigate(URLs.setting.menu)}>
+      <BlockButton onClick={() => navigate(URLs.setting)}>
         Back to Setting
       </BlockButton>
     </Box>

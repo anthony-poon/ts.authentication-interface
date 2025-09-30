@@ -2,19 +2,22 @@ import env from '@env';
 import React from 'react';
 import { Box } from '@mui/material';
 import { Link } from 'react-router';
-import URLs from '@url';
-import DefaultLayout from '../DefaultLayout';
+import { URLs } from '@url';
+import AppLayout from '../AppLayout';
+import { DefaultContainer } from '@component/layout/components/container/DefaultContainer';
 
 const IndexApp = () => {
   return (
-    <DefaultLayout>
-      <Box>
-        Hello World. Current environment: {env.APP_ENV}
-      </Box>
-      <Box>
-        <Link to={URLs.authorize.login + "?redirect=" + URLs.home}>Login</Link>
-      </Box>
-    </DefaultLayout>
+    <AppLayout>
+      <DefaultContainer>
+        <Box>
+          Hello World. Current environment: {env.APP_ENV}
+        </Box>
+        <Box>
+          <Link to={URLs.authorize_login + "?redirect=" + URLs.home}>Login</Link>
+        </Box>
+      </DefaultContainer>
+    </AppLayout>
   )
 }
 

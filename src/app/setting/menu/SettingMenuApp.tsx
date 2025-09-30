@@ -1,28 +1,31 @@
 import React from "react"
-import DefaultLayout from '../../DefaultLayout';
+import AppLayout from '../../AppLayout';
 import { ActionList } from '@component/list/ActionList';
 import { NavigableAction } from '@component/list/NavigableAction';
 import { ActionListHeader } from '@component/list/ActionListHeader';
-import { useNavigate } from 'react-router';
-import URLs from '@url';
+import { URLs } from '@url';
+import { DefaultContainer } from '@component/layout/components/container/DefaultContainer';
+import { Breadcrumb } from '@component/url/Breadcrumb';
 
 
 export const SettingMenuApp = () => {
-  const navigate = useNavigate();
   return (
-    <DefaultLayout maxWidth={"md"} align={"center"}>
-      <ActionList title={"Setting"}>
-        <ActionListHeader>General</ActionListHeader>
-        <NavigableAction to={URLs.setting.profile}>
-          Profile
-        </NavigableAction>
-        <NavigableAction to={URLs.setting.password}>
-          Change Password
-        </NavigableAction>
-        <NavigableAction to={URLs.setting.totp.list}>
-          Two Factor Authentication
-        </NavigableAction>
-      </ActionList>
-    </DefaultLayout>
+    <AppLayout>
+      <DefaultContainer variant={"md"}>
+        <Breadcrumb />
+        <ActionList>
+          <ActionListHeader>General</ActionListHeader>
+          <NavigableAction to={URLs.setting_profile}>
+            Profile
+          </NavigableAction>
+          <NavigableAction to={URLs.setting_password}>
+            Change Password
+          </NavigableAction>
+          <NavigableAction to={URLs.setting_totp}>
+            Two Factor Authentication
+          </NavigableAction>
+        </ActionList>
+      </DefaultContainer>
+    </AppLayout>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DefaultLayout from '../../../DefaultLayout';
+import AppLayout from '../../../AppLayout';
 import { makeFormData } from '@hook/use-form-data';
 import { RegisterTOTPRequest, RegisterTOTPResponse, ValidateTOTPRequest, ValidateTOTPResponse } from '@api/user/totp';
 import { useDispatch } from 'react-redux';
@@ -8,7 +8,9 @@ import { RegisterTOTPForm } from './components/RegisterTOTPForm';
 import { ValidateTOTPForm } from './components/ValidateTOTPFrom';
 import { DisplayRecoveriesView } from './components/DisplayRecoveriesView';
 import { useNavigate } from 'react-router';
-import URLs from '@url';
+import { URLs } from '@url';
+import { DefaultContainer } from '@component/layout/components/container/DefaultContainer';
+import { Breadcrumb } from '@component/url/Breadcrumb';
 
 enum TOTPStep {
   REGISTER_DEVICE,
@@ -53,7 +55,7 @@ const useAction = (props: AddTOTPAppViewProps) => {
         setRecoveries(recoveries);
         setStep(TOTPStep.SHOW_RECOVERIES);
       } else {
-        navigate(URLs.setting.totp.list);
+        navigate(URLs.setting_totp);
       }
     } catch (e) {
       dispatch(setToast(e));
@@ -66,18 +68,21 @@ const useAction = (props: AddTOTPAppViewProps) => {
 export const AddTOTPAppView = (props: AddTOTPAppViewProps) => {
   const { registration, recoveries, handleRegister, handleValidate, step } = useAction(props);
   return (
-    <DefaultLayout align={"center"} maxWidth={"sm"}>
-      { step === TOTPStep.REGISTER_DEVICE ? (
-        <RegisterTOTPForm onSubmit={handleRegister}/>
-      ) : step === TOTPStep.VALIDATE_DEVICE ? (
-        <ValidateTOTPForm
-          url={registration?.url || ""}
-          secret={registration?.secret || ""}
-          onSubmit={handleValidate}
-        />
-      ) : (
-        <DisplayRecoveriesView recoveries={recoveries}/>
-      ) }
-    </DefaultLayout>
+    <AppLayout>
+      <DefaultContainer variant={"md"}>
+        <Breadcrumb />
+        { step === TOTPStep.REGISTER_DEVICE ? (
+          <RegisterTOTPForm onSubmit={handleRegister}/>
+        ) : step === TOTPStep.VALIDATE_DEVICE ? (
+          <ValidateTOTPForm
+            url={registration?.url || ""}
+            secret={registration?.secret || ""}
+            onSubmit={handleValidate}
+          />
+        ) : (
+          <DisplayRecoveriesView recoveries={recoveries}/>
+        ) }
+      </DefaultContainer>
+    </AppLayout>
   )
 }

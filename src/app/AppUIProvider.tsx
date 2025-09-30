@@ -3,7 +3,7 @@ import React from "react";
 
 const theme = createTheme({});
 
-const DefaultUIProvider = (props: React.PropsWithChildren<{}>) => {
+const AppUIProvider = (props: React.PropsWithChildren<{}>) => {
   return (
     <ThemeProvider theme={theme}>
       {props.children}
@@ -11,4 +11,4 @@ const DefaultUIProvider = (props: React.PropsWithChildren<{}>) => {
   );
 };
 
-export default DefaultUIProvider;
+export default AppUIProvider;

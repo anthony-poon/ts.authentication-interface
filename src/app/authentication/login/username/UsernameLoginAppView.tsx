@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import FormTextInput from '@component/form/FormTextInput';
 import FormSubmitButton from '@component/form/FormSubmitButton';
 import { makeFormData } from '@hook/use-form-data';
@@ -7,7 +7,6 @@ import FormContainer from '@component/form/FormContainer';
 import { Subtitle, Title } from '@component/text';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 import FormPasswordInput from '@component/form/FormPasswordInput';
-import CardLayout from '@component/layout/card/CardLayout';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@store/index';
@@ -15,7 +14,8 @@ import { useLoader } from '@hook/use-loader';
 import { Authentication } from '@api/authentication';
 import { setToast } from '@store/slice/notification';
 import { addTokenByType, setLogin } from '@store/slice/authentication';
-import URLs from '@url';
+import { URLs } from '@url';
+import { DefaultContainer } from '@component/layout/components/container/DefaultContainer';
 
 type UsernameLoginAppViewProps = {
   authentication: typeof Authentication;
@@ -55,7 +55,7 @@ const useSubmit = (props: UsernameLoginAppViewProps, formData: FormDataType) => 
           type: "two_fa_challenge",
           tokenValue: authentication.challenge
         }))
-        navigate(URLs.authorize.totp);
+        navigate(URLs.authorize_totp);
       } else if (authentication.type == 'CALLBACK') {
         window.location.href = authentication.callback;
       }
@@ -74,38 +74,36 @@ const UsernameLoginAppView = (props: UsernameLoginAppViewProps) => {
   const { handleSubmit } = useSubmit(props, formData);
 
   return (
-    <CardLayout size={"sm"} isCentered={true}>
-      <Box mx={2}>
-        <FormContainer onSubmit={handleSubmit}>
-          <Box textAlign={"center"} my={5}>
-            <LockPersonIcon style={{ fontSize: 42 }} color={"action"} />
+    <DefaultContainer variant={"sm"}>
+      <FormContainer onSubmit={handleSubmit}>
+        <Box textAlign={"center"} mb={5}>
+          <LockPersonIcon style={{ fontSize: 42 }} color={"action"} />
+        </Box>
+        <Box textAlign={"center"} mb={4}>
+          <Title>
+            Login
+          </Title>
+          <Box mt={1}>
+            <Subtitle>
+              Need an account? Create an account <Link to={URLs.registration}>here</Link>
+            </Subtitle>
           </Box>
-          <Box textAlign={"center"}  mb={4}>
-            <Title>
-              Login
-            </Title>
-            <Box mt={1}>
-              <Subtitle>
-                Need an account? Create an account <Link to={URLs.registration.index}>here</Link>
-              </Subtitle>
-            </Box>
-          </Box>
-          <FormTextInput
-            label={"Username"}
-            value={formData.username}
-            onChange={makeFormChange("username")}
-            isRequired={true}
-          />
-          <FormPasswordInput
-            label={"Password"}
-            value={formData.password}
-            onChange={makeFormChange("password")}
-            isRequired={true}
-          />
-          <FormSubmitButton/>
-        </FormContainer>
-      </Box>
-    </CardLayout>
+        </Box>
+        <FormTextInput
+          label={"Username"}
+          value={formData.username}
+          onChange={makeFormChange("username")}
+          isRequired={true}
+        />
+        <FormPasswordInput
+          label={"Password"}
+          value={formData.password}
+          onChange={makeFormChange("password")}
+          isRequired={true}
+        />
+        <FormSubmitButton/>
+      </FormContainer>
+    </DefaultContainer>
   )
 }
 

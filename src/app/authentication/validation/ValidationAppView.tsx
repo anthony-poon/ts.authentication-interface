@@ -7,8 +7,8 @@ import MountLoader from '@component/MountLoader';
 import { Body, Title } from '@component/text';
 import { BlockButton } from '@component/button/BlockButton';
 import { Box } from '@mui/material';
-import URLs from '@url';
-import CardLayout from '@component/layout/card/CardLayout';
+import { URLs } from '@url';
+import { DefaultContainer } from '@component/layout/components/container/DefaultContainer';
 
 type ValidationAppProps = {
   authentication: typeof Authentication;
@@ -30,20 +30,18 @@ export const ValidationAppView = (props: ValidationAppProps) => {
     }
   }
   return (
-    <CardLayout isCentered={true} size={"sm"}>
-      <Box px={2}>
-        <MountLoader onMount={handleMount}>
-          <Box mb={3} style={{ minHeight: 150 }}>
-            <Title gutter={true}>Account Confirmed</Title>
-            <Body>
-              Your email has been successfully verified. You can now sign in and start using your account.
-            </Body>
-          </Box>
-          <BlockButton fullWidth={true} onClick={() => navigate(URLs.authorize.login)}>
-            Login
-          </BlockButton>
-        </MountLoader>
-      </Box>
-    </CardLayout>
+    <DefaultContainer variant={"sm"}>
+      <MountLoader onMount={handleMount}>
+        <Box mb={3} style={{ minHeight: 150 }}>
+          <Title gutter={true}>Account Confirmed</Title>
+          <Body>
+            Your email has been successfully verified. You can now sign in and start using your account.
+          </Body>
+        </Box>
+        <BlockButton fullWidth={true} onClick={() => navigate(URLs.authorize_login)}>
+          Login
+        </BlockButton>
+      </MountLoader>
+    </DefaultContainer>
   )
 }
